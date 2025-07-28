@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const port = 3000;
+const Log = require("../Logging Middleware");
 app.use(express.json());
 // app.post("/shorturls", (req, res) => {
 //   const { url, validity, shortcode } = req.body;
@@ -68,4 +69,9 @@ app.get("/shorturls/:shortcode", (req, res) => {
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
+});
+
+app.post("/log", (req, res) => {
+  console.log("LOG RECEIVED:", req.body);
+  res.json({ message: "log created successfully", logID: Date.now().toString() });
 });
